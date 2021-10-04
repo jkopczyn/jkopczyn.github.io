@@ -3,6 +3,20 @@
 <body>
 <ol>
 <li>
+<h1>Disk Encryption Password Changes</h1>
+<p>If you want to change the disk encryption password for your Linux machine, there is a simple set of steps.</p>
+  <ol>
+    <li> First, run <pre>sudo lsblk -o name,fstype</pre>. Look for the entry whose fstype is <pre>crypto_LUKS</pre>; common values are <pre>sda3</pre>, <pre>nvme0n1p3</pre>.</li>
+    <li> <pre>$luks=/dev/NAME</pre>, where NAME is the result from the previous step. </li>
+    <li> <pre>sudo cryptsetup luksDump $luks</pre>; look at the listed "Keyslots" entries. If you have not changed the disk encryption before, 
+      there will be an entry for "<pre>0:</pre>" and no others, but if it has been changed before, or there are multiple passphrases, there may be entries for 1,2, etc., which may go as far as 7.</li>
+    <li> Assuming there was only the single entry for 0, execute <pre>sudo cryptsetup luksAddKey $luks -S 1</pre> to create the new passphrase. Change the number in <pre>-S 1</pre> if necessary.
+      You will need to enter an existing passphrase, then you will be able to add your new passphrase.</li>
+    <li>(Technically optional, but skip at your peril) Restart your machine and decrypt the disk with your new passphrase, to be sure you have it correct.</li>
+    <li> <pre>sudo cryptsetup luksRemoveKey <$luks> -S 0</pre> to delete the old passphrase. Since you restarted, <code>$luks</code> won't be set, and you'll need to substitute this in manually.</li>
+  </ol>
+</li>
+<li>
 <h1>Rails</h1>
 <p>A wise man once said of Las Vegas:
 <blockquote>"It is glorious that we can create something like this. It is shameful that we <em>did</em>."</blockquote> This is approximately how I feel about Rails.</p>

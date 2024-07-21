@@ -3,17 +3,41 @@
 <body>
 <ol>
   <li>
+    <h1>Try Planning Meetings On Fridays</h1>
+    <p>Inspired by the Crowdstrike debacle, I was considering things that might structurally discourage Friday afternoon pushes. And it
+      occurred to me that if you structured the 'beginning of the week' on Friday, 'get this done by the end of the week' would tend to
+      mean Thursday. And there are some other good points in favor:</p>
+      <ul>
+        <li>Retrospective and planning is done with the last four days in more recent memory</li>
+        <li>Most plans and projects will be in the early stages over the weekend, and so less context will get lost and need to be
+          remembered</li>
+      </ul>
+    <p>Of course, there are also some considerations against:</p>
+    <ul>
+      <li>'Do this immediately' would have a tendency to mean Friday pushes. This is probably easy to remember and discourage, but it
+        won't go away entirely.</li>
+      <li>Probably at least minor productivity loss on Friday afternoon since you'll forget a lot of your state before Monday.</li>
+    </ul>
+    <p>I think that on balance this would be net positive, and definitely has high enough expected value to be worth trying.</p>
+  </li>
+  <li>
     <h1>Disk Encryption Password Changes</h1>
     <p>If you want to change the disk encryption password for your Linux machine, there is a simple set of steps.</p>
     <ol>
-      <li> First, run <pre>sudo lsblk -o name,fstype</pre>. Look for the entry whose fstype is <pre>crypto_LUKS</pre>; common values are <pre>sda3</pre>, <pre>nvme0n1p3</pre>.</li>
+      <li> First, run <pre>sudo lsblk -o name,fstype</pre>. Look for the entry whose fstype is <pre>crypto_LUKS</pre>; common values
+        are <pre>sda3</pre>, <pre>nvme0n1p3</pre>.</li>
       <li> <pre>$luks=/dev/NAME</pre>, where NAME is the result from the previous step. </li>
-      <li> <pre>sudo cryptsetup luksDump $luks</pre>; look at the listed "Keyslots" entries. If you have not changed the disk encryption before,
-        there will be an entry for "<pre>0:</pre>" and no others, but if it has been changed before, or there are multiple passphrases, there may be entries for 1,2, etc., which may go as far as 7.</li>
-      <li> Assuming there was only the single entry for 0, execute <pre>sudo cryptsetup luksAddKey $luks -S 1</pre> to create the new passphrase. Change the number in <pre>-S 1</pre> if necessary.
+      <li> <pre>sudo cryptsetup luksDump $luks</pre>; look at the listed "Keyslots" entries. If you have not changed the disk
+        encryption before,
+        there will be an entry for "<pre>0:</pre>" and no others, but if it has been changed before, or there are multiple
+        passphrases, there may be entries for 1,2, etc., which may go as far as 7.</li>
+      <li> Assuming there was only the single entry for 0, execute <pre>sudo cryptsetup luksAddKey $luks -S 1</pre> to create the new
+        passphrase. Change the number in <pre>-S 1</pre> if necessary.
         You will need to enter an existing passphrase, then you will be able to add your new passphrase.</li>
-      <li>(Technically optional, but skip at your peril) Restart your machine and decrypt the disk with your new passphrase, to be sure you have it correct.</li>
-      <li> <pre>sudo cryptsetup luksRemoveKey <$luks> -S 0</pre> to delete the old passphrase. Since you restarted, <code>$luks</code> won't be set, and you'll need to substitute this in manually.</li>
+      <li>(Technically optional, but skip at your peril) Restart your machine and decrypt the disk with your new passphrase, to be
+        sure you have it correct.</li>
+      <li> <pre>sudo cryptsetup luksRemoveKey <$luks> -S 0</pre> to delete the old passphrase. Since you restarted, <code>$luks</code>
+        won't be set, and you'll need to substitute this in manually.</li>
     </ol>
   </li>
   <li>
@@ -24,10 +48,12 @@
   </li>
   <li>
     <h1>Dynamic Programming</h1>
-    <p>I am convinced that dynamic programming is a fad that has stuck around for no real reason. If you're writing an algorithm that has repeated subproblems, you can straightforwardly
-      write a recursive algorithm that works intuitively. You can then add memoization, which in the right circumstances gives substantial benefits to speed at the cost of space.</p>
-    <p>Or, you can rewrite the entire algorithm to optimize the subproblem records, i.e. dynamic programming, at the cost of comprehensibility for readers and considerable time and
-      effort for the author. Frequently this only improves performance by a constant factor, and rarely does it do better than O(n<sup>3</sup>) to O(n<sup>2</sup>) or O(n log n) to O(n log log n).
+    <p>I am convinced that dynamic programming is a fad that has stuck around for no real reason. If you're writing an algorithm that
+      has repeated subproblems, you can straightforwardly       write a recursive algorithm that works intuitively. You can then add
+      memoization, which in the right circumstances gives substantial benefits to speed at the cost of space.</p>
+    <p>Or, you can rewrite the entire algorithm to optimize the subproblem records, i.e. dynamic programming, at the cost of
+      comprehensibility for readers and considerable time and effort for the author. Frequently this only improves performance by a
+      constant factor, and rarely does it do better than O(n<sup>3</sup>) to O(n<sup>2</sup>) or O(n log n) to O(n log log n).
       Choosing DP is almost always a mistake.</p>
 </li>
 </ol>

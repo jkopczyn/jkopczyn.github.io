@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Posts - Jacob Kopczynski</title>
+  <style>
+    body { font-family: Georgia, serif; max-width: 40em; margin: 2em auto; padding: 0 1em; line-height: 1.6; }
+    .date { color: #666; font-style: italic; }
+    article { margin-bottom: 3em; border-bottom: 1px solid #ddd; padding-bottom: 2em; }
+    article:last-of-type { border-bottom: none; }
+    nav { margin-bottom: 2em; }
+    a { color: #1a0dab; }
+    pre { display: inline; }
+  </style>
+</head>
+<body>
+  <nav><a href="/">&larr; Home</a></nav>
+  <h1>Posts</h1>
+  <div id="posts"></div>
+
+  <script>
+    const postFiles = [
+      "2024-10-02-break-things.html",
+      "2024-07-21-planning-meetings-on-fridays.html",
+      "2021-10-04-disk-encryption.html",
+      "2021-05-03-dynamic-programming.html",
+      "2021-04-25-rails.html"
+    ];
+
+    const container = document.getElementById("posts");
+
+    (async () => {
+      for (const file of postFiles) {
+        const resp = await fetch(file);
+        const html = await resp.text();
+        const article = document.createElement("article");
+        article.innerHTML = html;
+        container.appendChild(article);
+      }
+    })();
+  </script>
+</body>
+</html>

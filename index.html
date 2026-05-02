@@ -29,12 +29,32 @@
       color: #d07020;
       margin-right: 0.5em;
     }
+    .header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5em;
+    }
+    .header-text { flex: 1; }
+    .profile-photo {
+      width: 8em;
+      height: 8em;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 2px solid #d07020;
+      flex-shrink: 0;
+    }
   </style>
 </head>
 <body>
-  <h1>Jacob Kopczynski</h1>
-  <p>A generalist programmer with backend and SRE tendencies. Also an intermittent writer, because I
-  clearly need more time at my keyboard.</p>
+  <div class="header">
+    <div class="header-text">
+      <h1>Jacob Kopczynski</h1>
+      <p>A generalist programmer with backend and SRE tendencies. Also an intermittent writer, because I
+      clearly need more time at my keyboard.</p>
+    </div>
+    <img class="profile-photo" src="20250913_pirate_board_crop_tight.jpg" alt="Jacob Kopczynski">
+  </div>
   <h4>Some links:</h4>
   <ul>
       <li><a href="posts/index.html">Blogging</a>: Substack and microposts.</li>

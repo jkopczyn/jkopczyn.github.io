@@ -1,0 +1,14 @@
+<div>
+  <h2>Two Guards At A Crossroads: LLM Prompting</h2>
+  <p class="date">June 7, 2025</p>
+  <quote>Two guards stand at a crossroads. One always lies and the other always tells the truth. One way leads to riches, the other to
+    certain death. You may ask one question.</quote>
+  <p>Prompting an LLM well is hard, and many tasks require a sophisticated custom task-focused prompt for optimal results, and sometimes
+    even for decent results. Often they’ll be sycophantic even if you do, unless you get even more complicated.</p>
+  <p>But as with the guards, there’s a fairly simple trick I was taught this week: Ask them to ask the question for you.</p>
+  <p>For any complicated question, have your system prompt be something like this:</p>
+  <quote>I am going to give you a question. First tell me the best prompt to give you in order to answer that question,
+    then respond to that prompt.</quote>
+  <p>It removes most sycophancy because it’s answering itself more than you and only the suggested prompt gets the sycophancy.
+    It unlocks much more of the default capabilities than asking yourself because it knows better than you how to prompt itself.</p>
+</div>
